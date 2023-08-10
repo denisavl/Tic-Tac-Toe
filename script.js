@@ -7,33 +7,39 @@ const gameBoard = () => {
   return { board };
 };
 const array = gameBoard();
-
+let gameEnded = false;
+let choice = "X";
 const game = (() => {
-  let choice = "X";
-  let winnerDeclared = false;
+  
   const field = document.querySelectorAll(".child");
   field.forEach((fields) => {
     fields.addEventListener("click", () => {
-    if (winnerDeclared) return;
+      if (!gameEnded) { 
         const id = fields.id;
         const [x, y] = id.split("-");
         const row = parseInt(x);
         const column = parseInt(y);
-  
+
         if (array.board[row][column] === "") {
           array.board[row][column] = choice;
           fields.textContent = choice;
           if (choice === "X") {
             choice = "O";
           } else choice = "X";
-  
+
           displayController(array);
         }
-        console.log(winnerDeclared);
-  
+
+        if (gameEnded) {
+          field.forEach((cell) => {
+            cell.removeEventListener("click", () => {});
+          });
+        }
+      }
     });
   });
 })();
+
 
 function displayController(array) {
   const player = document.querySelector(".playerWins");
@@ -47,7 +53,7 @@ function displayController(array) {
         array.board[i][0] === "X")
     ) {
       player.textContent = "Player one wins";
-      winnerDeclared = true;
+      gameEnded = true;
     } else if (
       (array.board[0][i] === array.board[1][i] &&
         array.board[1][i] === array.board[2][i] &&
@@ -57,7 +63,7 @@ function displayController(array) {
         array.board[i][0] === "O")
     ) {
       player.textContent = "Player two wins";
-      winnerDeclared = true;
+      gameEnded = true;
     }
   }
 
@@ -70,7 +76,7 @@ function displayController(array) {
       array.board[0][2] === "X")
   ) {
     player.textContent = "Player one wins";
-    winnerDeclared = true;
+    gameEnded = true;
   } else if (
     (array.board[0][0] === array.board[1][1] &&
       array.board[1][1] === array.board[2][2] &&
@@ -80,15 +86,30 @@ function displayController(array) {
       array.board[0][2] === "O")
   ) {
     player.textContent = "Player two wins";
-    winnerDeclared = true;
+    gameEnded = true;
   }
   const isDraw = array.board.every(row => row.every(cell => cell !== ""));
   if (isDraw) {
     player.textContent = "It's a draw";
+    gameEnded = true;
   }
 }
 
 const restartBt = document.querySelector(".restart");
-restartBt.addEventListener("click",()=>{
+restartBt.addEventListener("click", () => {
+  const field = document.querySelectorAll(".child");
+  const player = document.querySelector(".playerWins");
+  field.forEach((fields) => {
+    fields.textContent = "";
+  });
 
-})
+  array.board = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
+
+  gameEnded = false;
+  choice = "X";
+  player.textContent = "";
+});
