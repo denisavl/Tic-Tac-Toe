@@ -1,26 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="./script.js" defer></script>
-</head>
-<body>
-    <h1 class="title">Tic Tac Toe</h1>
-    <div class="container">
-        <div class="child" id="0-0"></div>
-        <div class="child" id="0-1"></div>
-        <div class="child" id="0-2"></div>
-        <div class="child" id="1-0"></div>
-        <div class="child" id="1-1"></div>
-        <div class="child" id="1-2"></div>
-        <div class="child" id="2-0"></div>
-        <div class="child" id="2-1"></div>
-        <div class="child" id="2-2"></div>
+    <link rel="icon" href="icon.png" type="image/png">
+  </head>
+  <body>
+    <div class="modal">
+      <div class="modal-content">
+        <form>
+          <div>
+            <label for="player1">Player one:</label>
+            <input
+              type="text"
+              name="player1"
+              id="player1"
+              placeholder="Enter name"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div>
+            <label for="player2">Player two:</label>
+            <input
+              type="text"
+              name="player2"
+              id="player2"
+              placeholder="Enter name"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <button class="startGame">START</button>
+        </form>
+      </div>
     </div>
+    <h1 class="title">Tic-Tac-Toe</h1>
+    <div class="playersTurn">
+      <div class="leftPlayer"></div>
+      <div class="rightPlayer"></div>
+    </div>
+    <div class="reloadBtn">
+      <button class="reload">↺</button>
+    </div>
+    <div class="container">
+      <div class="child" id="0-0"></div>
+      <div class="child" id="0-1"></div>
+      <div class="child" id="0-2"></div>
+      <div class="child" id="1-0"></div>
+      <div class="child" id="1-1"></div>
+      <div class="child" id="1-2"></div>
+      <div class="child" id="2-0"></div>
+      <div class="child" id="2-1"></div>
+      <div class="child" id="2-2"></div>
+    </div>
+
     <p class="playerWins"></p>
     <button class="restart">RESTART</button>
-</body>
+  </body>
 </html>
